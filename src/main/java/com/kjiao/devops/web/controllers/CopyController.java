@@ -4,13 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by kjiao on 20/03/2017.
+ * Created by kjiao on 13/04/2017.
  */
 @Controller
-public class HelloWorldController {
+public class CopyController {
 
-//    @RequestMapping("/")
-//    public String sayHello(){
-//        return "index";
-//    }
+    @RequestMapping("/about")
+    public String about() {
+        return "copy/about";
+    }
 }
