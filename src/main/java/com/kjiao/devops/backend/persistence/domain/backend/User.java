@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by tedonema on 28/03/2016.
  */
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     /**
      * The Serial Version UID for Serializable classes.
@@ -29,12 +29,12 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(unique = true)
+    @Column
     private String username;
 
     private String password;
 
-    @Column(unique = true)
+    @Column
     private String email;
 
     @Column(name = "first_name")
@@ -53,9 +53,6 @@ public class User implements Serializable {
 
     @Column(name = "profile_image_url")
     private String profileImageUrl;
-
-    @Column(name = "stripe_customer_id")
-    private String stripeCustomerId;
 
     private boolean enabled;
 
@@ -79,6 +76,27 @@ public class User implements Serializable {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities =  new HashSet<>();
+        userRoles.forEach(tmp -> authorities.add(new Authority((tmp.getRole().getName()))));
+        return authorities;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -138,14 +156,6 @@ public class User implements Serializable {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
-    }
-
-    public String getStripeCustomerId() {
-        return stripeCustomerId;
-    }
-
-    public void setStripeCustomerId(String stripeCustomerId) {
-        this.stripeCustomerId = stripeCustomerId;
     }
 
     public boolean isEnabled() {

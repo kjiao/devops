@@ -1,18 +1,13 @@
 package com.kjiao.devops.test.integration;
 
-import com.kjiao.devops.backend.persistence.domain.backend.Plan;
 import com.kjiao.devops.backend.persistence.domain.backend.Role;
 import com.kjiao.devops.backend.persistence.domain.backend.User;
 import com.kjiao.devops.backend.persistence.domain.backend.UserRole;
-import com.kjiao.devops.backend.persistence.repositories.PlanRepository;
-import com.kjiao.devops.backend.persistence.repositories.RoleRepository;
-import com.kjiao.devops.backend.persistence.repositories.UserRepository;
 import com.kjiao.devops.backend.service.UserService;
 import com.kjiao.devops.enums.PlansEnum;
 import com.kjiao.devops.enums.RolesEnum;
-import com.kjiao.devops.utils.UsersUtils;
+import com.kjiao.devops.utils.UserUtils;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +31,7 @@ public class UserServiceIntegrationTest {
     public void testCreateNewUser() throws Exception {
 
         Set<UserRole> userRoles = new HashSet<>();
-        User basicUser = UsersUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser();
         userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
 
         User user = userService.createUser(basicUser,PlansEnum.BASIC, userRoles);

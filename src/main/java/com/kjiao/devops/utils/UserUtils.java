@@ -5,9 +5,9 @@ import com.kjiao.devops.backend.persistence.domain.backend.User;
 /**
  * Created by kjiao on 07/05/2017.
  */
-public class UsersUtils {
+public class UserUtils {
 
-    private UsersUtils() {
+    private UserUtils() {
         throw new AssertionError("Non instantiable");
     }
 
