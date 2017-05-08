@@ -29,12 +29,12 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column(name = "first_name")
